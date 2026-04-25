@@ -326,22 +326,10 @@ def render_card(title: str, hp: int, max_hp: int, fact: str, role: str) -> None:
 
 
 def render_log() -> None:
-    lines = [line for line in battle.last_log.splitlines() if line.strip()]
-    weak_hit = any("弱点！1.5倍！" in line for line in lines)
-    log_html = "".join(
-        f"<div class='battle-log-line'>{html.escape(line)}</div>"
-        for line in lines[-4:]
-    )
-    weak_html = "<div class='weak-hit'>弱点！1.5倍！</div>" if weak_hit else ""
     st.markdown(
         f"""
         <div class="center-panel">
             <div class="vs-badge">VS</div>
-            <div class="battle-log">
-                <div class="battle-log-title">バトルログ</div>
-                {log_html}
-                {weak_html}
-            </div>
             <div class="draw-badge">あいこカウント: {battle.draw_count} / 3</div>
         </div>
         """,
@@ -453,11 +441,6 @@ with tabs[0]:
             )
             enemy_cost = get_total_cost(st.session_state.custom_loadouts[battle.cpu_card.name])
             st.info(f"敵の合計コスト: {enemy_cost} / {battle.cpu_card.max_cost}")
-
-    if st.session_state.log_history:
-        with st.expander("これまでのログ"):
-            for entry in st.session_state.log_history[:8]:
-                st.code(entry)
 
 with tabs[1]:
     st.subheader("カード編集")
