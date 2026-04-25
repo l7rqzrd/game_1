@@ -230,7 +230,7 @@ st.markdown(
 )
 
 st.title("Animal Clash Atlas")
-st.caption("実在する動物で戦う、明るいカードバトルMVP")
+st.caption("実在する動物で戦うじゃんけんバトルMVP")
 
 
 ANIMAL_EMOJI = {
